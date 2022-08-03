@@ -1,0 +1,30 @@
+.login {
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .login-input {
+    height: 10px;
+    width: 50vh;
+    padding: 10px;
+  }
+  
+  .login-button {
+    border: none;
+    padding: 10px 20px;
+    background-color: teal;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
