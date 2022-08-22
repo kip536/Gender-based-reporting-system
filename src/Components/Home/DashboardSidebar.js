@@ -37,6 +37,11 @@ const items = [
       title: 'Messages'
     },
     {
+      href: '/reports',
+      icon: (<UserAddIcon fontSize="small" />),
+      title: 'Reports'
+    },
+    {
       href: '/account',
       icon: (<UserIcon fontSize="small" />),
       title: 'Account'
@@ -50,11 +55,6 @@ const items = [
       href: '/logout',
       icon: (<LockIcon fontSize="small" />),
       title: 'Logout'
-    },
-    {
-      href: '/register',
-      icon: (<UserAddIcon fontSize="small" />),
-      title: 'Register'
     },
     {
       href: '/404',

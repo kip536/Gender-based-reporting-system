@@ -12,16 +12,39 @@ import {
 
 const states = [
   {
-    value: 'alabama',
-    label: 'Alabama'
+    value: 'Nakuru',
+    label: 'Nakuru'
   },
   {
-    value: 'new-york',
-    label: 'New York'
+    value: 'Nairobi',
+    label: 'Nairobi'
   },
   {
-    value: 'san-francisco',
-    label: 'San Francisco'
+    value: 'Kisumu',
+    label: 'Kisumu'
+  },
+  {
+    value: 'Mombasa',
+    label: 'Mombasa'
+  },
+  {
+    value: 'Eldoret',
+    label: 'Eldoret'
+  }
+];
+
+const usertype = [
+  {
+    value: 0,
+    label: 'Super Admin'
+  },
+  {
+    value: 1,
+    label: 'Admin'
+  },
+  {
+    value: 2,
+    label: 'Normal User'
   }
 ];
 
@@ -66,7 +89,7 @@ export const AddUser = (props) => {
       mode: "no-cors",
       body: JSON.stringify(userdetails),
     }
-    await fetch('https://localhost/fgm/register.php', options)
+    await fetch('http://localhost/fgm/register.php', options)
     // .then(
     //   response => response.json(),
   
@@ -103,13 +126,15 @@ export const AddUser = (props) => {
               md={6}
               xs={12}
             >
+              
               <TextField
+                required
                 fullWidth
                 // helperText="Please specify the first name"
                 label="Name"
                 name="name"
                 onChange={handleChange}
-                required
+                
                 // value={values.firstName}
                 variant="outlined"
               />
@@ -119,7 +144,27 @@ export const AddUser = (props) => {
               md={6}
               xs={12}
             >
-              
+              <TextField
+                fullWidth
+                label="Select user"
+                name="usertype"
+                onChange={handleChange}
+                required
+                select
+                SelectProps={{ native: true }}
+                // value={values.state}
+                variant="outlined"
+              >
+                {usertype.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                  >
+                    
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
             </Grid>
             <Grid
               item
@@ -146,7 +191,7 @@ export const AddUser = (props) => {
                 label="Phone Number"
                 name="phone"
                 onChange={handleChange}
-                type="number"
+                inputProps={{inputMode: 'numeric', Pattern: '[0-9]*'}}
                 // value={values.phone}
                 variant="outlined"
               />
@@ -158,8 +203,8 @@ export const AddUser = (props) => {
             >
               <TextField
                 fullWidth
-                label="Country"
-                name="country"
+                label="County"
+                name="county"
                 onChange={handleChange}
                 required
                 // value={values.country}

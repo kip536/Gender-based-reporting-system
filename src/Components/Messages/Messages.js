@@ -108,9 +108,9 @@ function Messages() {
                     onChange={handleSelectAll}
                     />
                   </TableCell>
-                  <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
+                  {/* <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
                     Name
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
                     Phone
                   </TableCell>
@@ -118,7 +118,7 @@ function Messages() {
                     Message
                   </TableCell>
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
-                    Area
+                    Location
                   </TableCell>
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
                     Title
@@ -138,9 +138,9 @@ function Messages() {
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
                     Action
                   </TableCell>
-                  <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
+                  {/* <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
                     Report
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -156,27 +156,6 @@ function Messages() {
                       onChange={(event) => handleSelectOne(event, res.msg_id)}
                       value="true"
                       />
-                    </TableCell>
-                    <TableCell>
-                      <Box
-                      sx={{
-                        alignItems: 'center',
-                        display: 'flex'
-                      }}
-                      >
-                        <Avatar
-                        src=''
-                        sx={{ mr:2 }}
-                        >
-                          {/* TODO */}
-                        </Avatar>
-                        <Typography
-                        color='textPrimary'
-                        variant='body1'
-                        >
-                          {res.sender_name}
-                        </Typography>
-                      </Box>
                     </TableCell>
                     <TableCell>
                       {res.sender_phone}
@@ -217,9 +196,9 @@ function Messages() {
                         {res.action}
                       </SeverityPill>
                     </TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       {res.report}
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>

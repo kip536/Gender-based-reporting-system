@@ -12,27 +12,35 @@ import {
 
 const states = [
   {
-    value: 'alabama',
-    label: 'Alabama'
+    value: 'Nakuru',
+    label: 'Nakuru'
   },
   {
-    value: 'new-york',
-    label: 'New York'
+    value: 'Nairobi',
+    label: 'Nairobi'
   },
   {
-    value: 'san-francisco',
-    label: 'San Francisco'
+    value: 'Kisumu',
+    label: 'Kisumu'
+  },
+  {
+    value: 'Mombasa',
+    label: 'Mombasa'
+  },
+  {
+    value: 'Eldoret',
+    label: 'Eldoret'
   }
 ];
 
 const AccountDetails = (props) => {
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
+    firstName: 'Victor',
+    lastName: 'Omanyala',
     email: 'demo@devias.io',
     phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    location: 'lanet',
+    town: 'Nakuru'
   });
 
   const handleChange = (event) => {
@@ -127,11 +135,11 @@ const AccountDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Country"
-                name="country"
+                label="location"
+                name="location"
                 onChange={handleChange}
                 required
-                value={values.country}
+                value={values.location}
                 variant="outlined"
               />
             </Grid>
@@ -142,13 +150,13 @@ const AccountDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Select State"
-                name="state"
+                label="Select Town"
+                name="Town"
                 onChange={handleChange}
                 required
                 select
                 SelectProps={{ native: true }}
-                value={values.state}
+                value={values.town}
                 variant="outlined"
               >
                 {states.map((option) => (

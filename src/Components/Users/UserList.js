@@ -70,6 +70,9 @@ function UserList() {
                     Email
                   </TableCell>
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
+                    County
+                  </TableCell>
+                  <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
                     Location
                   </TableCell>
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
@@ -121,13 +124,16 @@ function UserList() {
                       {res.email}
                     </TableCell>
                     <TableCell>
+                      {res.county}
+                    </TableCell>
+                    <TableCell>
                       {res.location}
                     </TableCell>
                     <TableCell>
                       {res.phone_no}
                     </TableCell>
                     <TableCell>
-                      date
+                      {res.date_created}
                     </TableCell>
                   </TableRow>
                 ))}

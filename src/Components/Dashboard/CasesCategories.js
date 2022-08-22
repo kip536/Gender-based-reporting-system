@@ -43,7 +43,7 @@ const CasesCategories = (props) => {
   console.log('fgm:',fgm);
   console.log('chillabr:',childlabour);
   console.log('domestic:',domesticviolence);
-  console.log('othrs:',others);
+  console.log('others:',others);
 
   const data = {
     datasets: [

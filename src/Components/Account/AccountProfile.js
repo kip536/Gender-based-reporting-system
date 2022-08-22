@@ -10,11 +10,11 @@ import {
   } from '@mui/material';
   
   const user = {
-    avatar: '/static/images/avatars/avatar_6.png',
-    city: 'Los Angeles',
-    country: 'USA',
-    jobTitle: 'Senior Developer',
-    name: 'Katarina Smith',
+    avatar: '/static/images/avatars/avatar_1.png',
+    location: 'Lanet',
+    county: 'Nakuru',
+    userType: 'Admin',
+    name: 'Victor Omanyala',
     timezone: 'GTM-7'
   };
   
@@ -47,7 +47,7 @@ import {
             color="textSecondary"
             variant="body2"
           >
-            {`${user.city} ${user.country}`}
+            {`${user.location} ${user.county}`}
           </Typography>
           <Typography
             color="textSecondary"

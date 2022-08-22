@@ -14,6 +14,8 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Logout from './Components/Logout/Logout';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
+import Reports from './Components/Reports/Reports';
+import Messageinfo from './Components/Messages/Messageinfo';
 
 
 const drawerWidth = 280;
@@ -82,7 +84,7 @@ const App = () => {
     const token= await loginuser(userdetails);
     console.log('real token:', token)
 
-    if (token == []) {
+    if (token === []) {
       
       console.log('woopssssssssss')
       return
@@ -141,10 +143,11 @@ const App = () => {
         <Route path='/' element={<Dashboard/>}/>
         {/* <Route path='/dashboard' element={</>}/> */}
         <Route path='/messages' element={<Messages/>}/>
+        <Route path='/reports' element={<Reports/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/users' element={<UserList/>}/>
         <Route path='/settings' element={<NotificationEdit/>}/>
-        <Route path='/account' element={<Account/>}/>
+        <Route path='/account' element={<Messageinfo/>}/>
         <Route path='/adduser' element={<AddUser/>}/>
         <Route path='/dialog' element={<Errordialog/>}/>
         <Route path='/logout' element={<Logout handlelogout={handlelogout}/>}/>
