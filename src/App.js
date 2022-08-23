@@ -10,12 +10,13 @@ import NotificationEdit from './Components/Settings/NotificationEdit';
 import Account from './Components/Account/Account';
 import { AddUser } from './Components/Users/AddUser';
 import Errordialog from './Components/Errordialog/Errordialog';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import Logout from './Components/Logout/Logout';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
 import Reports from './Components/Reports/Reports';
 import Messageinfo from './Components/Messages/Messageinfo';
+import { AuthContext } from './Components/Context/AuthContext';
 
 
 const drawerWidth = 280;
@@ -40,18 +41,6 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 );
 
 
-async function loginuser(credentials) {
-  return fetch('http://localhost/fgm/signin.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-  .then(data => data.json())
-  
-}
-
 
 
 
@@ -59,59 +48,11 @@ const App = () => {
 
   
   const [open, setOpen] = useState(false);
-  const [gottendata, setGottendata] = useState('')
-  const [correct, setCorrect] = useState([]);
-  const [userdetails, setUserdetails] = useState(null)
+  const { user } = useContext(AuthContext);
+   
 
-
-  
-
-  const handleChange = (event) => {
-    event.preventDefault()
-    const value = event.target.value
-    
-    setUserdetails({
-      ...userdetails,
-      [event.target.id]: value
-    });
-    
-    
-  };
-
-  const handleDetails= async (e) =>{
-    e.preventDefault()
-    console.log('userdetails:',userdetails)
-    const token= await loginuser(userdetails);
-    console.log('real token:', token)
-
-    if (token === []) {
-      
-      console.log('woopssssssssss')
-      return
-    } else {
-      localStorage.setItem('token', JSON.stringify(token))
-    }
-    
-    
-    
-    
-    // console.log('token:',token)
-  }
-
-  
-
-  const token = localStorage.getItem('token')
-  console.log('token:',token)
-
-  
-  
-
-  if (!token) {
-    return <Login
-    handleDetails={handleDetails}
-    handleChange={handleChange}
-    // setToken={setToken}
-    />
+  if (!user) {
+    return <Login/>
   }
   
 
@@ -141,7 +82,7 @@ const App = () => {
       />
       <Routes>
         <Route path='/' element={<Dashboard/>}/>
-        {/* <Route path='/dashboard' element={</>}/> */}
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/messages' element={<Messages/>}/>
         <Route path='/reports' element={<Reports/>}/>
         <Route path='/login' element={<Login/>}/>

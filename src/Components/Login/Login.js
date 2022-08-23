@@ -1,85 +1,120 @@
 import React from "react";
-import "../Login/Login.css";
-import { useState } from "react";
-import PropTypes from "prop-types";
-import axios from 'axios';
+import { useState, useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { LoginCall } from "./LoginCall";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 
-function Login({handleDetails, handleChange}) {
+function Login() {
 
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const [userdetails, setUserdetails] = useState([])
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState(null);
 
-  
-  
-  // async function loginuser(credentials) {
-  //   return fetch('http://localhost/fgm/signin.php', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(credentials)
-  //   })
-  //   .then(data => data.json())
-    
-  // }
+  const { dispatch, error, isFetching, user } = useContext(AuthContext);
 
-
-  // const handleDetails= async (e) =>{
-  //   e.preventDefault()
-  //   const token= await loginuser({name, password});
-    
-  //   localStorage.setItem('token', JSON.stringify(token))
-  //   // console.log('token:',token)
-  // }
-
-  // const postandfetchtoken = () => {
-    
-  // }
-
+  const LoginUser = (e) => {
+    e.preventDefault();
+    LoginCall({ name, password }, dispatch);
+  };
 
   
 
   return (
-    <div className="login">
-      <div className="center">
-        <h1>User Login</h1>
-        <form onSubmit={handleDetails}>
-        <div className="login-container">
-          <label>Username</label>
-          <input
-            type="text"
-            placeholder="username"
-            id="username"
-            className="login-input"
-            // value={name}
-            onChange={handleChange}
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="password"
-            id="password"
-            className="login-input"
-            // value={password}
-            onChange={handleChange}
-          />
-          <button className="login-button" type="submit">
-            
-            Login
-          </button>
-         
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+
+          <Typography component="h1" variant="h5">
+            User Sign in
+          </Typography>
+
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+
+
+          <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Your name"
+              name="name"
+              autoFocus
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={LoginUser}
+            >
+              Sign In
+            </Button>
+            {error && (
+              <span style={{ color: "red", fontSize: "12px" }}>
+                *Invalid username or password
+              </span>
+            )}
           
-          </div>
-          </form>
-      </div>
-    </div>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+             
+            </Grid>
+               
+            
+
+          </Box>
+   
+       
+     
+      </Box>
+      
+    </Container>
   );
 }
 
-Login.prototype = {
-  setToken: PropTypes.func.isRequired
-}
 
 export default Login;

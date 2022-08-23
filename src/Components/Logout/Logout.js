@@ -10,17 +10,28 @@ import {
     Typography
   } from '@mui/material';
 
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
+import { getInitials } from '../utils/get-initials';
 
-const user = {
-    avatar: '/static/images/avatars/avatar_1.png',
-    location: 'Lanet',
-    county: 'Nakuru',
-    userType: 'Admin',
-    name: 'Victor Omanyala',
-    timezone: 'GTM-7'
-  };
 
-function Logout(handlelogout) {
+// const user = {
+//     avatar: '/static/images/avatars/avatar_1.png',
+//     location: 'Lanet',
+//     county: 'Nakuru',
+//     userType: 'Admin',
+//     name: 'Victor Omanyala',
+//     timezone: 'GTM-7'
+//   };
+
+function Logout() {
+
+
+const { user, dispatch } = useContext(AuthContext);
+
+  const handlelogout = () => {
+    dispatch({type: "LOGOUT"});
+  }
 
     
   return (
@@ -41,7 +52,9 @@ function Logout(handlelogout) {
               mb: 2,
               width: 64
             }}
-          />
+          >
+            {getInitials(user.name)}
+          </Avatar>
           <Typography
             color="textPrimary"
             gutterBottom

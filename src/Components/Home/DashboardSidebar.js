@@ -22,7 +22,7 @@ import IconButton from '@mui/material/IconButton';
 
 const items = [
     {
-      href: '/',
+      href: '/dashboard',
       icon: (<ChartBarIcon fontSize="small" />),
       title: 'Dashboard'
     },
