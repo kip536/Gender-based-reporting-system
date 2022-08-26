@@ -17,6 +17,7 @@ import ErrorPage from './Components/ErrorPage/ErrorPage';
 import Reports from './Components/Reports/Reports';
 import Messageinfo from './Components/Messages/Messageinfo';
 import { AuthContext } from './Components/Context/AuthContext';
+import { UpdateUserForm } from './Components/Users/UpdateUser';
 
 
 const drawerWidth = 280;
@@ -90,9 +91,11 @@ const App = () => {
         <Route path='/settings' element={<NotificationEdit/>}/>
         <Route path='/account' element={<Messageinfo/>}/>
         <Route path='/adduser' element={<AddUser/>}/>
+        <Route path = "/users/:userId" element ={<UpdateUserForm/>}/>
         <Route path='/dialog' element={<Errordialog/>}/>
         <Route path='/logout' element={<Logout handlelogout={handlelogout}/>}/>
         <Route path='/404' element={<ErrorPage/>}/>
+        
       </Routes>
       </Main>
       </BrowserRouter>

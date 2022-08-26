@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext} from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { PropTypes } from 'prop-types';
@@ -18,50 +18,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { styled, useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
+import { AuthContext } from '../Context/AuthContext';
 
 
-const items = [
-    {
-      href: '/dashboard',
-      icon: (<ChartBarIcon fontSize="small" />),
-      title: 'Dashboard'
-    },
-    {
-      href: '/users',
-      icon: (<UsersIcon fontSize="small" />),
-      title: 'Users'
-    },
-    {
-      href: '/messages',
-      icon: (<MarkunreadIcon fontSize="small" />),
-      title: 'Messages'
-    },
-    {
-      href: '/reports',
-      icon: (<UserAddIcon fontSize="small" />),
-      title: 'Reports'
-    },
-    {
-      href: '/account',
-      icon: (<UserIcon fontSize="small" />),
-      title: 'Account'
-    },
-    {
-      href: '/settings',
-      icon: (<CogIcon fontSize="small" />),
-      title: 'Settings'
-    },
-    {
-      href: '/logout',
-      icon: (<LockIcon fontSize="small" />),
-      title: 'Logout'
-    },
-    {
-      href: '/404',
-      icon: (<XCircleIcon fontSize="small" />),
-      title: 'Error'
-    }
-  ];
 
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -77,6 +36,158 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 function DashboardSidebar({ opened }) {
+
+  const {user} = useContext(AuthContext)
+  let userType = "";
+
+  let items = []
+
+  if (user.user_type === "0" ){
+    userType= "Super Admin"
+  }
+  if (user.user_type === "1" ){
+    userType= "Admin"
+  }
+  if (user.user_type === "2" ){
+    userType= "Normal User"
+  }
+
+  
+
+if (user.user_type === "0" ){
+    
+  items = [
+  {
+    href: '/dashboard',
+    icon: (<ChartBarIcon fontSize="small" />),
+    title: 'Dashboard'
+  },
+  {
+    href: '/users',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'Users'
+  },
+  {
+    href: '/messages',
+    icon: (<MarkunreadIcon fontSize="small" />),
+    title: 'Messages'
+  },
+  {
+    href: '/reports',
+    icon: (<UserAddIcon fontSize="small" />),
+    title: 'Reports'
+  },
+  {
+    href: '/account',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Account'
+  },
+  {
+    href: '/settings',
+    icon: (<CogIcon fontSize="small" />),
+    title: 'Settings'
+  },
+  {
+    href: '/logout',
+    icon: (<LockIcon fontSize="small" />),
+    title: 'Logout'
+  },
+  {
+    href: '/404',
+    icon: (<XCircleIcon fontSize="small" />),
+    title: 'Error'
+  }
+];
+}
+
+if (user.user_type === "1" ){
+    
+  items = [
+  {
+    href: '/dashboard',
+    icon: (<ChartBarIcon fontSize="small" />),
+    title: 'Dashboard'
+  },
+  {
+    href: '/users',
+    icon: (<UsersIcon fontSize="small" />),
+    title: 'Users'
+  },
+  {
+    href: '/messages',
+    icon: (<MarkunreadIcon fontSize="small" />),
+    title: 'Messages'
+  },
+  {
+    href: '/reports',
+    icon: (<UserAddIcon fontSize="small" />),
+    title: 'Reports'
+  },
+  {
+    href: '/account',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Account'
+  },
+  {
+    href: '/settings',
+    icon: (<CogIcon fontSize="small" />),
+    title: 'Settings'
+  },
+  {
+    href: '/logout',
+    icon: (<LockIcon fontSize="small" />),
+    title: 'Logout'
+  },
+  {
+    href: '/404',
+    icon: (<XCircleIcon fontSize="small" />),
+    title: 'Error'
+  }
+];
+}
+
+if (user.user_type === "2" ){
+    
+  items = [
+  {
+    href: '/dashboard',
+    icon: (<ChartBarIcon fontSize="small" />),
+    title: 'Dashboard'
+  },
+  
+  {
+    href: '/messages',
+    icon: (<MarkunreadIcon fontSize="small" />),
+    title: 'Messages'
+  },
+  {
+    href: '/reports',
+    icon: (<UserAddIcon fontSize="small" />),
+    title: 'Reports'
+  },
+  {
+    href: '/account',
+    icon: (<UserIcon fontSize="small" />),
+    title: 'Account'
+  },
+  {
+    href: '/settings',
+    icon: (<CogIcon fontSize="small" />),
+    title: 'Settings'
+  },
+  {
+    href: '/logout',
+    icon: (<LockIcon fontSize="small" />),
+    title: 'Logout'
+  },
+  {
+    href: '/404',
+    icon: (<XCircleIcon fontSize="small" />),
+    title: 'Error'
+  }
+];
+}
+  
 
 
 
@@ -152,7 +263,8 @@ function DashboardSidebar({ opened }) {
                 >
                   User type
                   {' '}
-                  : Admin
+                  : {userType}
+                  
                 </Typography>
               </div>
               <SelectorIcon

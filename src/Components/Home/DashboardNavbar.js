@@ -7,6 +7,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Bell as BellIcon } from '../Icons/bell';
 import { UserCircle as UserCircleIcon } from '../Icons/user-circle';
 import { Users as UsersIcon } from '../Icons/users';
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
+import { getInitials } from '../utils/get-initials';
 
 
 
@@ -19,6 +22,7 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 function DashboardNavbar({ clickshow, state, clickclose }) {
 
+  const { user, dispatch } = useContext(AuthContext);
 
   
 
@@ -67,6 +71,7 @@ function DashboardNavbar({ clickshow, state, clickclose }) {
           </Tooltip>
 
           <Box sx={{ flexGrow: 1 }} />
+          <p style={{ color: 'black' }} color='primary'>{user.name}</p>
           <Tooltip title="Contacts">
             <IconButton sx={{ ml: 1 }}>
               <UsersIcon fontSize="small" />
@@ -89,9 +94,10 @@ function DashboardNavbar({ clickshow, state, clickclose }) {
               width: 40,
               ml: 1
             }}
-            src="/static/images/avatars/avatar_1.png"
+            // src="/static/images/avatars/avatar_1.png"
           >
-            <UserCircleIcon fontSize="small" />
+            {getInitials(user.name)}
+            {/* <UserCircleIcon fontSize="small" /> */}
           </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>

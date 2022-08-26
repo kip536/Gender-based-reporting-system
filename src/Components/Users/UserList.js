@@ -14,10 +14,12 @@ import {
 } from '@mui/material';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import UserListToolBar from './UserListToolBar';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import { getInitials } from '../utils/get-initials';
 
 function UserList() {
 
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
   const [users, setUsers] = useState([])
 
 
@@ -44,8 +46,45 @@ function UserList() {
       
     }
 
-  // console.log('users are:', users)
-  // console.log('users no. is:', users.length)
+    const handleSelectAll = (event) => {
+      let newSelectedUserIds;
+  
+      if (event.target.checked) {
+        newSelectedUserIds = users.map((user) => user.user_id);
+      } else {
+        newSelectedUserIds = [];
+      }
+  
+      setSelectedUserIds(newSelectedUserIds);
+    };
+
+
+    const handleSelectOne = (event, user_id) => {
+      const selectedIndex = selectedUserIds.indexOf(user_id);
+      let newSelectedUserIds = [];
+  
+      if (selectedIndex === -1) {
+        newSelectedUserIds = newSelectedUserIds.concat(
+          selectedUserIds,
+          user_id
+        );
+      } else if (selectedIndex === 0) {
+        newSelectedUserIds = newSelectedUserIds.concat(
+          selectedUserIds.slice(1)
+        );
+      } else if (selectedIndex === selectedUserIds.length - 1) {
+        newSelectedUserIds = newSelectedUserIds.concat(
+          selectedUserIds.slice(0, -1)
+        );
+      } else if (selectedIndex > 0) {
+        newSelectedUserIds = newSelectedUserIds.concat(
+          selectedUserIds.slice(0, selectedIndex),
+          selectedUserIds.slice(selectedIndex + 1)
+        );
+      }
+  
+      setSelectedUserIds(newSelectedUserIds);
+    };
   
 
 
@@ -60,7 +99,12 @@ function UserList() {
                 <TableRow>
                   <TableCell padding='checkbox'>
                     <Checkbox
-                    // TODO
+                    color="primary"
+                    indeterminate={
+                      selectedUserIds.length > 0 &&
+                      selectedUserIds.length < users.length
+                    }
+                    onChange={handleSelectAll}
                     />
                   </TableCell>
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
@@ -87,15 +131,15 @@ function UserList() {
                 {users.map((res) => (
                   
                   <TableRow
-                  // component = {Link} to={`/users/${res.user_id}`}
+                  component = {Link} underline="none" to ={`/users/${res.user_id}`}
                   hover
                   key={res.user_id}
-                  selected={''}
+                  selected={selectedUserIds.indexOf(res.user_id) !== -1}
                   >
                     <TableCell padding='checkbox'>
                       <Checkbox
-                      checked=''
-                      onChange={''}
+                      checked={selectedUserIds.indexOf(res.user_id) !== -1}
+                      onChange={(event) => handleSelectOne(event, res.user_id)}
                       value="true"
                       />
                     </TableCell>
@@ -110,7 +154,7 @@ function UserList() {
                         src=''
                         sx={{ mr:2 }}
                         >
-                          {/* TODO */}
+                          {getInitials(res.name)}
                         </Avatar>
                         <Typography
                         color='textPrimary'
