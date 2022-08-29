@@ -37,6 +37,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 function DashboardSidebar({ opened }) {
 
+
+  const logo = '/static/images/humanrightslogo.png'
+
   const {user} = useContext(AuthContext)
   let userType = "";
 
@@ -187,6 +190,12 @@ if (user.user_type === "2" ){
   }
 ];
 }
+
+const myStyle={
+  width:'100%',
+  height:'100px',
+  marginleft:'0'
+  };
   
 
 
@@ -228,12 +237,13 @@ if (user.user_type === "2" ){
               passHref
             >
               <a>
-                <Logo
+              <img src={logo} alt="Logo" style={myStyle} />
+                {/* <Logo
                   sx={{
                     height: 42,
                     width: 42
                   }}
-                />
+                /> */}
               </a>
             </NextLink>
           </Box>
@@ -255,7 +265,7 @@ if (user.user_type === "2" ){
                   color="inherit"
                   variant="subtitle1"
                 >
-                  Gender Based
+                  Violated Rights
                 </Typography>
                 <Typography
                   color="neutral.400"

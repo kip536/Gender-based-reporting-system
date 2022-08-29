@@ -61,7 +61,7 @@ const location = {
 
   return (
     <div>
-      <h2>Reports</h2>
+      <h2 style={{marginBottom: 0}}>Reports</h2>
       <Box
       component="main"
       sx={{

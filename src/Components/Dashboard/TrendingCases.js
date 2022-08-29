@@ -41,8 +41,8 @@ const cases = [
   },
   {
     id: uuid(),
-    name: 'Lyft',
-    imageUrl: '/static/images/products/product_4.png',
+    name: 'Police harassment',
+    imageUrl: '/static/images/products/policebrutality.jpg',
     updatedAt: subHours(Date.now(), 5)
   },
   {
