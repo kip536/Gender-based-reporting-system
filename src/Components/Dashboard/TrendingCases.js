@@ -12,26 +12,31 @@ import {
   ListItemAvatar,
   ListItemText
 } from '@mui/material';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { ArrowDownward } from '@mui/icons-material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import MaterialTable from 'material-table';
+import * as XLSX from 'xlsx'
+// import PrintIcon from '@material-ui/icons/Print';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
-const products = [
+const cases = [
   {
     id: uuid(),
-    name: 'Dropbox',
-    imageUrl: '/static/images/products/product_1.png',
+    name: 'FGM',
+    imageUrl: '/static/images/products/fgm.png',
     updatedAt: subHours(Date.now(), 2)
   },
   {
     id: uuid(),
-    name: 'Medium Corporation',
-    imageUrl: '/static/images/products/product_2.png',
+    name: 'Child labour',
+    imageUrl: '/static/images/products/childlabour.jpg',
     updatedAt: subHours(Date.now(), 2)
   },
   {
     id: uuid(),
-    name: 'Slack',
-    imageUrl: '/static/images/products/product_3.png',
+    name: 'Domestic violence',
+    imageUrl: '/static/images/products/domesticviolence.png',
     updatedAt: subHours(Date.now(), 3)
   },
   {
@@ -48,11 +53,46 @@ const products = [
   }
 ];
 
-const TrendingCases = (props) => (
-  <Card {...props}>
+const TrendingCases = (props) => {
+  const columns = [
+    { title: "Case Name", field: "name", },
+    { title: "Total", field: "updatedAt", },
+    { title: "Unresolved", field: "year", type: "numeric" },
+    { title: "resolved", field: 'fee', type: "numeric" }]
+
+  const downloadExcel = () => {
+    const newData = cases.map(row => {
+      delete row.tableData
+      return row
+    })
+    const workSheet = XLSX.utils.json_to_sheet(newData)
+    const workBook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workBook, workSheet, "cases")
+    //Buffer
+    XLSX.write(workBook, { bookType: "xlsx", type: "buffer" })
+    //Binary string
+    XLSX.write(workBook, { bookType: "xlsx", type: "binary" })
+    //Download
+    XLSX.writeFile(workBook, "cases.xlsx")
+
+
+  }
+  const downloadPdf = () => {
+    const doc = new jsPDF()
+    doc.text("All Cases", 20, 10)
+    doc.autoTable({
+      theme: "grid",
+      columns: columns.map(col => ({ ...col, dataKey: col.field })),
+      body: cases
+    })
+    doc.save('cases.pdf')
+  }
+
+  return (
+    <Card {...props}>
     <CardHeader
-      subtitle={`${products.length} in total`}
-      title="Trending Cases"
+      subtitle={`${cases.length} in total`}
+      title="All Cases"
     />
     <Divider />
     <List
@@ -60,9 +100,9 @@ const TrendingCases = (props) => (
         flexDirection: 'column'
         }}
     >
-      {products.map((product, i) => (
+      {cases.map((product, i) => (
         <ListItem
-          divider={i < products.length - 1}
+          divider={i < cases.length - 1}
           key={product.id}
         >
           <ListItemAvatar>
@@ -97,15 +137,27 @@ const TrendingCases = (props) => (
       }}
     >
       <Button
+        onClick={downloadPdf}
         color="primary"
-        endIcon={<ArrowRightIcon />}
+        endIcon={<ArrowDownward />}
         size="small"
         variant="text"
       >
-        View all
+        Download pdf
+      </Button>
+      <Button
+        onClick={downloadExcel}
+        color="primary"
+        endIcon={<ArrowDownward />}
+        size="small"
+        variant="text"
+      >
+        Save to excel
       </Button>
     </Box>
   </Card>
-);
+  )
+  
+};
 
 export default TrendingCases

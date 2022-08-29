@@ -15,6 +15,7 @@ import {
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import MessageToolbar from './MessagesToolbar';
 import SeverityPill from '../Home/SeverityPill';
+import {Link} from 'react-router-dom';
   
 
 
@@ -146,6 +147,7 @@ function Messages() {
               <TableBody>
                 {messages.slice(0, limit).map((res) => (
                   <TableRow
+                  // component = {Link} to ={`/message/${res.msg_id}`}
                   hover
                   key={res.msg_id}
                   selected={selectedMessageIds.indexOf(res.msg_id) !== -1}
