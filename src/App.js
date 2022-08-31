@@ -90,7 +90,7 @@ const App = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/users' element={<UserList/>}/>
         <Route path='/settings' element={<NotificationEdit/>}/>
-        <Route path='/account' element={<Messageinfo/>}/>
+        <Route path='/account' element={<Account/>}/>
         <Route path='/adduser' element={<AddUser/>}/>
         <Route path = "/users/:userId" element ={<UpdateUserForm/>}/>
         <Route path = "/message/:msg_Id" element ={<SingleMessageInfo/>}/>

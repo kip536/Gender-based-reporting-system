@@ -77,8 +77,10 @@ const TrendingCases = (props) => {
 
 
   }
+  const logo = '/static/images/humanrightslogo.png'
   const downloadPdf = () => {
     const doc = new jsPDF()
+    doc.img(logo)
     doc.text("All Cases", 20, 10)
     doc.autoTable({
       theme: "grid",

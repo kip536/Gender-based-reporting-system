@@ -125,12 +125,6 @@ function Messages() {
                     Title
                   </TableCell>
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
-                    Carrier
-                  </TableCell>
-                  <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
-                    Message_id
-                  </TableCell>
-                  <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
                     Date
                   </TableCell>
                   <TableCell style={{fontWeight: 'bold', fontSize: 'medium'}}>
@@ -147,7 +141,7 @@ function Messages() {
               <TableBody>
                 {messages.slice(0, limit).map((res) => (
                   <TableRow
-                  // component = {Link} to ={`/message/${res.msg_id}`}
+                  button component = {Link} to ={`/message/${res.msg_id}`} sx={{textDecoration:'none'}}
                   hover
                   key={res.msg_id}
                   selected={selectedMessageIds.indexOf(res.msg_id) !== -1}
@@ -170,12 +164,6 @@ function Messages() {
                     </TableCell>
                     <TableCell>
                       {res.case_title}
-                    </TableCell>
-                    <TableCell>
-                      {res.carrier}
-                    </TableCell>
-                    <TableCell>
-                      {res.carrier_msgid}
                     </TableCell>
                     <TableCell>
                       {res.date}

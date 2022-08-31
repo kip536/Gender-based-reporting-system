@@ -131,7 +131,7 @@ function UserList() {
                 {users.map((res) => (
                   
                   <TableRow
-                  component = {Link} underline="none" to ={`/users/${res.user_id}`}
+                  component = {Link} underline="none" to ={`/users/${res.user_id}`} sx={{textDecoration:'none'}}
                   hover
                   key={res.user_id}
                   selected={selectedUserIds.indexOf(res.user_id) !== -1}
