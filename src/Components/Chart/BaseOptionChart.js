@@ -81,9 +81,9 @@ export default function BaseOptionChart() {
     // Colors
     colors: [
       theme.palette.primary.main,
-      theme.palette.secondary.dark,
-      theme.palette.info.dark,
       theme.palette.error.dark,
+      theme.palette.success.dark,
+      theme.palette.info.dark,
       theme.palette.success.dark,
       theme.palette.error.dark
     ],
@@ -143,8 +143,8 @@ export default function BaseOptionChart() {
 
     // Xaxis
     xaxis: {
-      axisBorder: { show: false },
-      axisTicks: { show: false }
+      axisBorder: { show: true },
+      axisTicks: { show: true }
     },
 
     // Markers

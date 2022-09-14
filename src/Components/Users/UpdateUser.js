@@ -102,10 +102,10 @@ export const UpdateUserForm = (props) => {
                 fullWidth
                 label="User Password"
                 name="Password"
-                type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 required
+                type="password"
                 variant="outlined"
               />
             </Grid>

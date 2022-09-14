@@ -131,6 +131,41 @@ export const AddUser = (props) => {
                 required
                 fullWidth
                 // helperText="Please specify the first name"
+                label="Username"
+                name="username"
+                onChange={handleChange}
+                
+                // value={values.firstName}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              
+              <TextField
+                required
+                fullWidth
+                onChange={handleChange}
+                // helperText="Please specify the first name"
+                label="Password"
+                name="password"
+                type="password"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              
+              <TextField
+                required
+                fullWidth
+                // helperText="Please specify the first name"
                 label="Name"
                 name="name"
                 onChange={handleChange}

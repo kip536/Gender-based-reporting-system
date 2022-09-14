@@ -18,7 +18,7 @@ function Reports() {
   const [lon, setLon] = useState(null);
 
   // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-Geocode.setApiKey("MYKEY");
+Geocode.setApiKey("AIzaSyDsb7F-VyBJn7r4LilYH_lRHBpPfgyUga8");
 
 // Enable or disable logs. Its optional.
 Geocode.enableDebug();
@@ -51,8 +51,8 @@ Geocode.fromAddress("chepterwai").then(
 
 const location = {
   address: 'chepterwai',
-  lat: -0.281932,
-  lng: 36.155892
+  lat: lat,
+  lng: lon
   
 }
 
@@ -114,7 +114,7 @@ const location = {
             </Grid>
             <Grid item xs={12} md={6} lg={8}>
             <Generalgraph
-              title="Website Visits"
+              title="General Statistics against time"
               subheader="(+43%) than last year"
               chartLabels={[
                 '01/01/2003',
@@ -132,8 +132,8 @@ const location = {
               chartData={[
                 {
                   name: 'Team A',
-                  type: 'column',
-                  fill: 'solid',
+                  type: 'area',
+                  fill: 'gradient',
                   data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
                 },
                 {
@@ -144,8 +144,8 @@ const location = {
                 },
                 {
                   name: 'Team C',
-                  type: 'line',
-                  fill: 'solid',
+                  type: 'area',
+                  fill: 'gradient',
                   data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
                 },
               ]}

@@ -11,6 +11,8 @@ import {
 import { Box, Button, Card, CardContent, CardHeader, Divider, useTheme } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { useState, useEffect } from "react";
+
 
 ChartJS.register(
   CategoryScale,
@@ -23,32 +25,129 @@ ChartJS.register(
 
 const CasesTrend = (props) => {
   const theme = useTheme();
+  const [casedata, setCasedata] = useState([]);
+  const [titles, setTitles] = useState([]);
+  const [labels, setLabel] = useState([])
+  const [values, setValues] = useState([])
+  const [dataset, setDataset] = useState([])
+  const [area, setArea] = useState([]);
+
+
+  useEffect(() => {
+    const getcasesdata = async () => {
+      const areasFromServer = await fetchcasesdata()
+      setCasedata(areasFromServer)
+      console.log(areasFromServer)
+      
+    }
+
+    getcasesdata()
+  }, []);
+
+
+    const fetchcasesdata = async () => {
+      const result = await fetch('http://localhost/fgm/casesperareas.php');
+      const data = await result.json()
+      // const area = data.map((res) => res.area)
+      // const cases = data.map((res) => res.cases)
+      // console.log('area is',area)
+      // console.log('cases is',cases)
+      // // const newarr = Object.values(data).map((res, idx) => {
+      // //   return {label: [res], value: Object.keys(res)}
+      // // })
+      const filteredareas = Array.from(
+        Object.entries(
+          data.reduce((s, {area}) => {
+            for (const {name, value} of area) {
+              (s[name] = [value])[value] +=''
+            }
+            console.log('ssssssss', s)
+            return s;
+          }, {})),
+          ([name, _data]) => ({
+            name,
+          }),
+      )
+      setTitles(filteredareas.map((res)=> res.name));
+
+      console.log('valuuuu is', filteredareas)
+
+      
+      const casesmappeddata = Array.from(
+        Object.entries(
+          data.reduce((a, {inputs}) => {
+
+            for (const {label, backgroundColor, value} of inputs) {
+              (a[label] = [backgroundColor, value])[value] +=[value];
+              
+            }
+            console.log('aaaaaa', a)
+            return a;
+          }, {})),
+        ([label, _data]) => ({
+          label,
+          were: _data,
+          data: [_data[1]],
+          backgroundColor: _data[0],
+          barPercentage: 0.5,
+          barThickness: 12,
+          borderRadius: 4,
+          categoryPercentage: 0.5,
+          maxBarThickness: 10
+        }),
+        
+      );
+      console.log('weeeeee',casesmappeddata);
+
+      setDataset(casesmappeddata)
+
+      
+      
+      
+      // const label = Object.entries(data).map(([key, value]) => [value].map((res)=> Object.values(res).map((info)=> info.label)));
+      setLabel()
+      // const value = Object.entries(data).map(([key, value]) => [value].map((res)=> Object.values(res).map((info)=> info.value)));
+      setValues()
+      
+
+      console.log('value is@@', values)
+      console.log('label is@@', labels)
+
+      console.log('data recieved is:', data)
+      console.log('keys are:', Object.keys(data))
+      console.log('labels are:', titles)
+
+      return data
+      
+    }
   
 
   const data = {
-    datasets: [
-      {
-        backgroundColor: '#3F51B5',
-        barPercentage: 0.5,
-        barThickness: 12,
-        borderRadius: 4,
-        categoryPercentage: 0.5,
-        data: [18, 5, 19, 27, 29, 19, 20],
-        label: 'This year',
-        maxBarThickness: 10
-      },
-      {
-        backgroundColor: 'lightgrey',
-        barPercentage: 0.5,
-        barThickness: 12,
-        borderRadius: 4,
-        categoryPercentage: 0.5,
-        data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Last year',
-        maxBarThickness: 10
-      }
-    ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 aug']
+    datasets: dataset,
+    // [
+    //   {
+    //     backgroundColor: '#3F51B5',
+    //     barPercentage: 0.5,
+    //     barThickness: 12,
+    //     borderRadius: 4,
+    //     categoryPercentage: 0.5,
+    //     data: casedata,
+    //     label: [labels],
+    //     maxBarThickness: 10
+    //   },
+    //   {
+    //     backgroundColor: 'lightgrey',
+    //     barPercentage: 0.5,
+    //     barThickness: 12,
+    //     borderRadius: 4,
+    //     categoryPercentage: 0.5,
+    //     data: [11, 20, 12, 29, 30, 25, 13],
+    //     label: 'Last year',
+    //     maxBarThickness: 10
+    //   }
+    // ],
+    labels: titles
+    // ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 aug']
   };
 
   const options = {
